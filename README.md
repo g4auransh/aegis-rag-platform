@@ -1,16 +1,19 @@
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+AEGIS-RAG: Auditable Medical Policy Claim Verification & Research PlatformAn interactive research prototype and evaluation platform implementing the layered architecture of AEGIS-RAG ("AEGIS-RAG: Robust Self-RAG through Multi-Agent Debate and Ensemble Judging").This platform simulates and executes auditable healthcare insurance claim adjudication against versioned, immutable medical policy schedules—mitigating reward hacking, mode collapse, catastrophic forgetting, and ungrounded hallucinations through structured multi-agent debate and bias-penalized ensemble judging.Research & Decision-Support Notice: This software is a research prototype using synthetic, de-identified clinical cases. It is designed for evaluation, ablation analysis, and human-in-the-loop underwriting decision support—not autonomous production claim settlement.✨ Key CapabilitiesClaim Adjudication Workbench (Layers 1–4)Version-Pinned Policy Retrieval & Self-RAG Sufficiency Gate: Evaluates clinical cases against immutable policy editions (HealthShield Gold v2.4 vs. v3.0) with cosine similarity scores and relevance filtering.Parallel Heterogeneous Multi-Agent Debate: Runs three role-differentiated agents (Coverage Eligibility Synthesizer, Strict Exclusion & Waiting-Period Auditor, and Clinical Coding & Sub-Limit Verifier) across Round 0 and Round 1 anonymized cross-critique, with adaptive early stopping ($\Delta_{div}^{(0)} < \delta_{early}$).Bias-Penalized Ensemble Judging: Interactive real-time sliders for length normalization ($\alpha$), repetition/verbosity penalty ($\beta_{rep}$), ungrounded citation penalty ($\beta_{ungrd}$), inter-judge dispersion ($\gamma$), and confidence routing thresholds ($\tau_{verdict}, \tau_{fallback}$).Live Custom Clinical Case Mode: Supports custom patient diagnoses/procedures executed via the Gemini API (gemini-3-flash-preview) alongside built-in deterministic edge-case simulations.Human Medical Underwriter Sign-Off: Commits auditable reviewer dispositions to an immutable trace log without triggering online model weight updates.Versioned Policy Corpus ExplorerBrowse and filter clauses (Inclusion, Exclusion, Waiting Period, Sub-Limit) with exact page numbers, section headers, and SHA-256 provenance hashes.Includes a side-by-side Edition Diff View highlighting rule changes between v2.4 (2025) and v3.0 (2026).5-Axis Evaluation & Adversarial Benchmark LabVisualizes target ablation trajectories across five baseline paradigms (Standard RAG, Vanilla Self-RAG, Single-Judge Self-RAG, AEGIS-RAG without KL, and Full AEGIS-RAG).Adversarial Reward-Hacking Stress Test: Interactive simulator demonstrating how verbosity padding and fabricated policy citations yield $\Delta_{hack} \le 0$ under AEGIS-RAG's calibrated judge.Layer 5 KL-Divergence Plasticity-Stability Curve: Explores Backward Transfer (BWT) retention versus new-policy accuracy across $\beta_{KL}$ values.Immutable Audit & Replay LogRecords every claim evaluation and human review with latency, token counts, policy hashes, and one-click configuration replay into the workbench.🛠️ PrerequisitesBefore running the project locally, make sure you have the following installed on your machine:Node.js (v18.0 or higher recommended — includes npm) → Download Node.jsGit → Download GitVerify your installation by running:node -v
+npm -v
+🚀 Getting Started (Local Setup)1. Clone the Repositorygit clone https://github.com/<your-username>/<your-repo-name>.git
+cd <your-repo-name>
+2. Install DependenciesInstall all required packages (react, lucide-react, recharts, and tailwindcss):npm install
+(If npm reports a peer-dependency conflict on newer Node/React versions, run npm install --legacy-peer-deps.)3. (Optional) Configure Gemini API Key for Live Custom CasesThe built-in pre-loaded patient cases and benchmark labs work out-of-the-box with zero API keys required. If you want to run Custom Structured Cases using live Gemini multi-agent inference:Create a .env file in the project root directory (same folder as package.json).Add your Google Gemini API key:VITE_GEMINI_API_KEY=your_actual_gemini_api_key_here
+Ensure apiKey in src/aegis_rag_medical_policy_verification_research_platform.tsx reads import.meta.env.VITE_GEMINI_API_KEY || ''.4. Start the Local Development Servernpm run dev
+Open the local URL displayed in your terminal (typically http://localhost:5173/) in your browser.📁 Project Structure├── public/
+├── src/
+│   ├── aegis_rag_medical_policy_verification_research_platform.tsx  # Main AEGIS-RAG application
+│   ├── index.css                                                  # Tailwind CSS entry (@import "tailwindcss";)
+│   └── main.jsx                                                   # React DOM entry point
+├── index.html
+├── package.json
+├── vite.config.js                                                 # Vite + React + Tailwind v4 config
+└── README.md
+🏗️ Building for ProductionTo bundle the application into static files for deployment (e.g., Vercel, Netlify, or GitHub Pages):npm run build
+Preview the production build locally with:npm run preview
+📚 Citation & AttributionBased on the research specification:AEGIS-RAG: Robust Self-RAG through Multi-Agent Debate and Ensemble JudgingGauransh Maheshwari, Kanishka Gupta, Ayush Shrivastava, and Ms. Shraddha ShrivastavaDepartment of Information Technology, Ajay Kumar Garg Engineering College (AKGEC), Ghaziabad, India.
